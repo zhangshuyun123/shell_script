@@ -31,7 +31,7 @@ do
 # -n 非空
 
   if [ -n "$APP_ID" ] && [ -n "$TASK_ID" ];then
-    TASK="`curl -sS -u admin:*zU.8xt^XG08 http://10.100.23.234:8080/v2/apps/$APP_ID/tasks|jq '.tasks[]|select(.id=="'$TASK_ID'")'`"
+    TASK="`curl -sS -u admin:*xxxxxx http://10.100.23.234:8080/v2/apps/$APP_ID/tasks|jq '.tasks[]|select(.id=="'$TASK_ID'")'`"
 
 # -z 为空   
    if [ -z "$TASK" ]; then
