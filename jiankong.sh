@@ -33,14 +33,36 @@ wget -P $DIR https://github.com/prometheus/prometheus/releases/download/v2.14.0/
 if [ `echo $?` -eq 0 ];then
   echo "promethus 下载完成"
   tar zxvf $DIR/prometheus-2.14.0.linux-amd64.tar.gz -C $DIR
-  bash $DIR/prometheus/prometheus
+  cd $DIR/prometheus-2.15.0-rc.0.linux-amd64
+  pwd
+  cp prometheus.yml prometheus.yml.bak
   cat >prometheus.yml << EOF
-- job_name: 'windows'
-  static_configs:
- - targets: ['IP(域名):9182]
-    labels:
-      instance: windows
+ my global config
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+
+ Alertmanager configuration
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+
+ Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+
+ A scrape configuration containing exactly one endpoint to scrape:
+ Here it's Prometheus itself.
+scrape_configs:
+  - job_name: 'linux'
+    static_configs:
+    - targets: ['101.201.69.197:9100']
+      labels:
+        instance: Prometheus
+
 EOF
+  
+  ./prometheus&
 else
   echo "下载失败"
 fi
@@ -49,7 +71,9 @@ wget -P $DIR https://github.com/prometheus/node_exporter/releases/download/v0.18
 if [ `echo $?` -eq 0 ];then
   echo "promethus 下载完成"
   tar zxvf $DIR/node_exporter-0.18.1.linux-amd64.tar.gz -C $DIR
-  bash $DIR/node_exporter/node_exporter
+  cd $DIR/node_exporter
+  pwd
+  ./node_exporter
 else
   echo "下载失败"
 fi
