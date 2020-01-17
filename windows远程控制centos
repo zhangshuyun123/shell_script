@@ -1,0 +1,21 @@
+字符界面安装图形化界面
+修改yum安装源
+curl -s https://developer.yonyoucloud.com/download/optools/update_ali_yum_source.sh 2>/dev/null | sh
+安装推行界面
+yum groupinstall "X Window System"
+yum groupinstall "GNOME Desktop" "Graphical Administration Tools"
+此步可能报“Transaction check error:
+file /boot/efi/EFI/centos from install of fwupdate-efi-12-5.el7.centos.x86_64 conflicts with file from package grub2-common-1:2.02-0.65.el7.centos.2.noarch”
+解决方法：yum upgrade -y 
+再次执行该安装命令
+安装完以后执行命令startx开启图形化界面
+
+
+
+安装yum install  epel* -y
+安装yum --enablerepo=epel -y install xrdp
+启动xrdp
+systemctl start xrdp
+systemctl enable xrdp
+
+windows终端远程控制
