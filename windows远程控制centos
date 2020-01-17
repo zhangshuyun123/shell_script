@@ -19,3 +19,4 @@ systemctl start xrdp
 systemctl enable xrdp
 
 windows终端远程控制
+win键 + r执行命令mstsc
